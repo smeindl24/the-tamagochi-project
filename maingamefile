@@ -1,0 +1,316 @@
+import time
+
+#general function section
+#function to simulate the clearing of a screen
+def clear_screen():
+       print("\n" * 20)
+
+#function to prompt the player to press enter to move on
+def prompt_to_continue_general():
+       input("Press Enter to continue")
+       clear_screen()
+
+#function to create short spaces between dialouge
+def style_space_short():
+       print("\n" * 1)
+
+#function to create longer spaces between dialouge
+def style_space_long():
+       print("\n" * 5)
+
+def delayed_text(text, delay = 1):
+    for char in text:
+        print(char, end='', flush=True)
+        time.sleep(delay)
+
+
+#game start (UNIQUE EVENT FUNCTION)
+def introduction_to_game():
+       print (' MYSTERY MAN: "AH! What are you doing out here?! '
+              '\n A newcomer appearing out of nowehere is never a good sign... '
+              '\n Anyways... come quickly! Its not safe to be out and about in Dreadwatch at night."')
+       style_space_short()
+       print (" . . . \033[3mYou follow the man shrouded in darkness into a small street-front store\033[0m . . .")
+       style_space_short()
+       print (' MYSTERY MAN: "Now that were inside, I want to apologize for my earlier comments...'
+              '\n Its not often that we get visitors here who just magically appear. ' 
+              '\n Allow me to properly introduce myself, I am \033[1m Peter, Caretaker of the Abyssal Haven Pet Center \033[0m. '
+              '\n And your name is?" ')
+       style_space_short()
+       #Peter (and the game) learns your name
+       player_name = input("Enter your name: ")
+       style_space_short()
+       print ('PETER: "Hmmm, ' + player_name + ' is it? Thats oddly normal all things considered. '
+              '\n Its a pleasure to meet you! Judging from the shocked expression, I assume youre '
+              '\n not from around here. Usually the locals dont mind a few extra arms and eyes. Hah." ')
+       style_space_short()
+       print ('PETER: "Honestly, I would call having 10 eyes and 4 arms a blessing in my line of work.'
+              '\n Being a nanny of adorable eldritch horrors takes a village... and we are understaffed." ')
+       style_space_short()
+       print (" . . . \033[3mYou take in your surroundings as Peter begins to rant about being the only staff member and the minimal wage he earns. "
+              "\n Compared to the menacing atmosphere and confusing geometry outside, what you assume is Abyssal Haven Pet Center "
+              "\n looks like any other pet store. The main room you are standing in is mainly populated with tall shelves stocked full of"
+              "\n various supplies. Upon further inspection, you cant read any of the script that is written on the products, the text shifting"
+              "\n as you try to focus on it. Other notable features include a counter with a register and a long hallway you cant see the end of"
+              "\n in the back of the store. The hallway radiates a cold and anxiety-inducing aura. \033[0m . . . ")
+       style_space_short()
+
+
+introduction_to_game()
+
+#function to prompt user for introduction cont. (UNIQUE EVENT FUNCTION)
+def prompt_to_continue_intro():
+       input("Press Enter to continue")
+       style_space_short()
+       print('PETER: "...Abyssal Haven, more like abyssmal payment. Anyways, I dont do the job for the salary, I do it for the sweet souls that require my assistance.'
+             '\n Was I rambling? Sorry about that, dont get to talk to people often. I saw you eyeing the hallway. Did you '
+             '\n want to see my pride and joys? I promise they arent as spooky as being called eldritch horrors makes them sound." ')
+       style_space_short()
+
+#function for peters question
+def peters_yes_or_no():
+     while True:
+       answer1 = input("Enter Yes or No: ").lower()
+       style_space_short()
+       if answer1 == "yes":
+              print('PETER: "Wonderful! Im so happy that you are willing to embrace the unknown just as I did inviting you in!" ')
+              break
+       elif answer1 == "no":
+              print('PETER: "Oh come on, Im not going to pull the "I saved you from imminent doom" card but I think it would'
+                    '\n  benefit you to see what inhabits this world. Might be of some use." ')
+              style_space_short()
+       else:
+              print('PETER: "I dont see the relevance of your answer to my question." ')
+              style_space_short()
+
+
+#call prompt continue intro and prompted question loop
+prompt_to_continue_intro()
+peters_yes_or_no()
+
+def beginning_adoption():
+       style_space_short()
+       print(" . . . \033[3m You walk down the hallway in the back of the store, it is unlit and narrow as Peter leads the"
+             "\n way. Three of his eyes that sit on the back of his head blankly stare at you, their yellow irises cutting"
+             "\n through the darkness like cat-eyes in a dark alleyway. You shiver as the light fades and the temperature drops."
+             "\n And all of a sudden you are in a kennel room, sizeable cages lining all available wall spaces . . .")
+       style_space_short()
+       print ( "While the space itself was no bigger than a restroom, it somehow felt... \033[1m v a  s  t \033[0m . . .")
+       style_space_short()
+       print ('PETER: "Isnt it just wonderful?! My shop hasnt been this empty in a century! That means that all of my little '
+              'nightmares are going to their forever homes! . . . Well, except for these three.')
+       style_space_short()
+       print(" . . . \033[3m You notice that there are three occupied kennels, each with only one creature inside"
+             "\n You glance nervously at each of them until you hear one call out to you\033[0m . . .")
+
+
+class Tamagotchi:
+    def __init__(self, petname, species = "???", age = 1, hunger=50, happiness=50, tired=50, energy=50, madness=50, sanity=50):
+        self.pet_name = petname
+        self.pet_species = species
+        self.pet_age = age
+        self.hunger = hunger
+        self.happiness = happiness
+        self.tired = tired
+        self.energy = energy
+        self.madness = madness
+        self.sanity = sanity
+
+    def feed(self):
+        self.hunger -= 10
+        self.happiness += 5
+        self.tired += 5
+
+    def play(self):
+        self.hunger -= 5
+        self.happiness += 10
+        self.tired += 5
+        self.energy -= 5
+
+    def nap(self):
+        self.hunger += 5
+        self.energy += 10
+        self.madness -= 5
+
+    def meditate(self):
+        self.madness += 10
+        self.sanity -= 5
+        self.tired += 5
+
+    def get_status(self):
+        return f"{self.pet_name} " \
+            f"\n ({self.pet_species})" \
+            f"\n Age: {self.pet_age}" \
+            f"\n Hunger: {self.hunger}" \
+            f"\n Happiness: {self.happiness}" \
+            f"\n Tired : {self.tired}" \
+            f"\n Energy : {self.energy}" \
+            f"\n Madness : {self.madness}" \
+            f"\n Sanity : {self.sanity}"
+        print("=====================")
+        style_space_short()
+
+
+    def check_evolution(self):
+        if self.pet_age > 10 and self.madness >= 100:
+            print(f"{self.pet_name} is growing into a new monstorous form!")
+
+def adoption():
+    style_space_short()
+    print("1) Eldritch Baby A (Crazy eyes, loves to cuddle. Distorts when observed)")
+    print("2) Eldritch Baby B (Usually tired but level-headed. It used to be a dream.)")
+    print("3) Eldritch Baby C (Insatiably hungry with boundless energy. A lethal combination for a wolf-like being.")
+    style_space_short()
+
+
+    while True:
+        adoptionchoice = input("Enter the number of your desired pet (1-3): ")
+
+        if adoptionchoice == "1":
+            style_space_short()
+            pet_name = input("Enter the name of your Eldritch Baby: ")
+            pet_species = "???"
+            pet_description = "Crazy eyes, loves to cuddle. Distorts when observed"
+            pet_age = 1
+            hunger = 50
+            happiness = 60
+            tired = 60
+            energy = 40
+            madness = 60
+            sanity = 40
+            break
+        elif adoptionchoice == "2":
+            style_space_short()
+            pet_name = input("Enter the name of your Eldritch Baby: ")
+            pet_species = "???"
+            pet_description = "Usually tired but level-headed. It used to be a dream."
+            pet_age = 1
+            hunger = 50
+            happiness = 50
+            tired = 65
+            energy = 35
+            madness = 40
+            sanity = 55
+            break
+        elif adoptionchoice == "3":
+            style_space_short()
+            pet_name = input("Enter the name of your Eldritch Baby: ")
+            pet_species = "???"
+            pet_description = "Insatiably hungry with boundless energy. A lethal combination for a wolf-like being."
+            pet_age = 1
+            hunger = 35
+            happiness = 40
+            tired = 40
+            energy = 65
+            madness = 45
+            sanity = 55
+            break
+        else:
+            delayed_text("\033[1m Y o u  m u s t  c h o o s e . . . \033[0m", delay=0.1)
+
+    return Tamagotchi(pet_name, pet_species, pet_age, hunger, happiness, tired, energy, madness, sanity)
+
+#Define player class to assign player name to system
+class Player:
+    def __init__(self):
+        self.name = None
+
+    def set_name(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+def get_player_name():
+    return input("Tell the entity your name: ")
+
+def save_player_name(player, playername):
+    player.set_name(playername)
+
+def main_game_loop(pet):
+
+    print('PETER: "What did you want to do?" ')
+
+    while True:
+        print(pet.get_status())
+
+        if pet.pet_age > 10 and pet.sanity >= 70:
+            print(f"{pet.pet_name} is twisting and growing into a new monstorous shape . . .")
+
+        style_space_short()
+        print("===========================")
+        print("1) Play")
+        print("2) Feed")
+        print("3) Meditate")
+        print("4) Nap")
+        print("5) Take a Walk")
+        print("6) Man the Store")
+        print("7) Quit")
+        print("===========================")
+        style_space_short()
+
+        choice = input("Enter the number of your choice: ")
+
+        if choice == "1":
+            pet.play()
+            style_space_long()
+        elif choice == "2":
+            pet.feed()
+            style_space_long()
+        elif choice == "3":
+            pet.meditate()
+            style_space_long()
+        elif choice == "4":
+            pet.nap()
+            style_space_long()
+        elif choice == "5":
+            print("Feature under construction")
+            style_space_long()
+        elif choice == "6":
+            print("Feature under construction")
+            style_space_long()
+        elif choice == "7":
+            print('PETER: "Ohhhh, youre fading out of existence. Ill take care of your pet while'
+                  '\n youre away.')
+            delayed_text("\033[1m C o m e  b a c k  s o o n! \033[0m", delay=0.1)
+            break
+        else:
+            print('PETER: "These are the only options I have for you at the moment..."')
+            style_space_long()
+
+#The Bridge
+def main():
+    player = Player()
+    pet = None
+
+    if not player.get_name():
+        name = get_player_name()
+        player.set_name(name)
+        style_space_short()
+        delayed_text("\033[1m Y o u  a r e  b o u n d . . . \033[0m", delay=0.1)
+
+    if not player.get_name():
+        pet = adoption()
+        player.set_name(pet.pet_name)
+    else:
+        pet = Tamagotchi(player.get_name())
+
+    style_space_short()
+    print("\n")
+    print('PETER: "This one seems to really like you! This new bond may be just the opportunity for you to get'
+          '\n familiar with the world of Nyx and its inhabitants.')
+
+
+    prompt_to_continue_general()
+
+    main_game_loop(pet)
+
+beginning_adoption()
+adoption()
+
+if __name__ == "__main__":
+    main()
+    style_space_short()
+    prompt_to_continue_general()
+    style_space_short()
+    main_game_loop(pet)
